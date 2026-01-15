@@ -43,3 +43,5 @@ Thumbs.db
 # Node (if frontend)
 # =========================
 node_modules/
+
+firebase.json
