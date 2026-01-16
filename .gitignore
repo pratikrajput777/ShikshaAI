@@ -45,3 +45,12 @@ Thumbs.db
 node_modules/
 
 firebase.json
+
+venv/
+  *.pyc
+  __pycache__/
+  .env
+  db.sqlite3
+  *.log
+  staticfiles/
+  media/
