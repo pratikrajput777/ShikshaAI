@@ -1,0 +1,57 @@
+version: "3.8"
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+
+  celery_worker:
+    build: .
+    command: celery -A jobreadiness worker -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - web
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+
+  celery_beat:
+    build: .
+    command: celery -A jobreadiness beat -l info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - web
+    env_file:
+      - .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+
+volumes:
+  redis_data:

@@ -1,0 +1,28 @@
+I am having trouble installing the dependencies for this project. It seems that your Python environment is not in a good state, and I am unable to fix it.
+
+I have created a file `gemini_test.py` that you can run to check if the `gemini-1.5-flash` model is available.
+
+To run the script, please follow these steps:
+
+1.  Make sure you have a working Python 3.11 environment.
+2.  I have created a new virtual environment called `venv-gemini`. You can try to use it by running `venv-gemini\Scripts\activate` in your terminal.
+3.  Install the dependencies again by running `pip install -r requirements.txt`. If it fails, you might have to clean your pip cache or investigate your python installation.
+4.  If you are able to install the dependencies, you can run the test script by executing `python gemini_test.py` in your terminal.
+
+The script will print a list of available models. If `gemini-1.5-flash` is not in the list, then you will have to use a different model.
+
+Here is the code I was trying to execute in the shell:
+
+```python
+import google.generativeai as genai
+from django.conf import settings
+
+genai.configure(api_key=settings.GEMINI_API_KEY)
+model = genai.GenerativeModel('gemini-1.5-flash')
+response = model.generate_content("Say hello!")
+print(response.text)
+```
+
+The error you are seeing is because the model `gemini-1.5-flash` is not available for the `v1beta` API version you are using with the old `google-generativeai` package.
+
+I would recommend to upgrade the `google-generativeai` package to the latest version and use the new `google.genai` package. However, I was unable to do so because of the issues with your environment.

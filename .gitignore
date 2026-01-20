@@ -1,0 +1,61 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environment
+# =========================
+venv/
+env/
+.venv/
+
+# =========================
+# Django
+# =========================
+db.sqlite3
+*.log
+local_settings.py
+.env
+
+# =========================
+# Django Migrations
+# =========================
+*/migrations/__pycache__/
+
+# =========================
+# Static & Media
+# =========================
+staticfiles/
+media/
+
+# =========================
+# OS / Editor
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# Node (if frontend)
+# =========================
+node_modules/
+
+firebase.json
+
+venv/
+  *.pyc
+  __pycache__/
+  .env
+  db.sqlite3
+  *.log
+  staticfiles/
+  media/
+
+  venv/
+venv-gemini/
+.env
+__pycache__/
