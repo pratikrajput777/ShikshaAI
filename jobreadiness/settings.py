@@ -4,6 +4,7 @@ import environ
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+
 # ==============================
 # BASE DIR
 # ==============================
@@ -71,6 +72,9 @@ LOCAL_APPS = [
     'skills',
     'core',
     'assessment',
+    'learning',
+    #'studyplan',     # <-- this is your real app name
+    #'lesson',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS

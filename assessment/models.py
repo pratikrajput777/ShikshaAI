@@ -186,3 +186,6 @@ class SkillGap(models.Model):
           ]
           ordering = ['-priority_score']
 
+
+
+
