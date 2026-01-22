@@ -12,7 +12,7 @@ class GeminiService:
         )
         return response.text
     
-import google.generativeai as genai
+import google.genai as genai
 import json
 import time
 from typing import Dict, List, Optional
@@ -82,3 +82,65 @@ def parse_json_response(self, response_text: str) -> Dict:
           if json_match:
               return json.loads(json_match.group())
           raise ValueError(f"Could not parse JSON: {e}")
+      
+
+      import json
+import time
+from django.conf import settings
+from google import genai
+
+
+class GeminiService:
+    """
+    Wrapper around Google Gemini (google.genai SDK)
+    """
+
+    def __init__(self):
+        # ✅ CORRECT way for new SDK
+        self.client = genai.Client(
+            api_key=settings.GEMINI_API_KEY
+        )
+
+    def generate_with_retry(
+        self,
+        prompt: str,
+        model_type: str = "lite",
+        retries: int = 3,
+        delay: int = 2
+    ) -> str:
+
+        model_map = {
+            "lite": settings.GEMINI_MODEL_LITE,
+            "flash": settings.GEMINI_MODEL_FLASH,
+            "pro": settings.GEMINI_MODEL_PRO,
+        }
+
+        model_name = model_map.get(model_type)
+        if not model_name:
+            raise ValueError(f"Invalid model_type: {model_type}")
+
+        for attempt in range(retries):
+            try:
+                response = self.client.models.generate_content(
+                    model=model_name,
+                    contents=prompt
+                )
+                return response.text
+
+            except Exception as e:
+                if attempt == retries - 1:
+                    raise
+                time.sleep(delay)
+
+    @staticmethod
+    def parse_json_response(text: str) -> dict:
+        """
+        Safely extract JSON from Gemini response
+        """
+        try:
+            start = text.index("{")
+            end = text.rindex("}") + 1
+            return json.loads(text[start:end])
+        except Exception as e:
+            raise ValueError(f"Invalid JSON from Gemini: {e}")
+

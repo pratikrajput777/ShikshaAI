@@ -150,8 +150,6 @@ GEMINI_MODEL_LITE = "models/gemini-pro"
 GEMINI_MODEL_FLASH = "models/gemini-pro"
 GEMINI_MODEL_PRO = "models/gemini-pro"
 
-
-
 # =========================
 # IRT Configuration
 # =========================
