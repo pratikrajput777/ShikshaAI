@@ -27,3 +27,5 @@
 
 1. Google Gemini API integration (Flash-Lite, Flash, Pro)
 2. Cascaded AI content generation (Macro → Meso → Micro)
+3. Study plan synthesizer with learning modules
+4. CFU (Check for Understanding) quiz generator
