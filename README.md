@@ -29,3 +29,8 @@
 2. Cascaded AI content generation (Macro → Meso → Micro)
 3. Study plan synthesizer with learning modules
 4. CFU (Check for Understanding) quiz generator
+5. Automatic remediation content creation
+6. Batch API integration for cost optimization (50% savings)
+7. Context caching for repeated prompts (90% savings)
+8. WebSocket progress notifications
+9. Learning asset management
