@@ -285,4 +285,27 @@ JSON ONLY:
             cfu_attempt.save(update_fields=["remediation_generated"])
 
         return remediation
+    
+    
+    def generate_study_plan_batch(self, user, target_occupation):
+      """Queue study plan generation as batch job for cost savings."""
+      # Create study plan in 'pending' status
+      study_plan = StudyPlan.objects.create(
+          user=user,
+          target_occupation=target_occupation,
+          status='pending'
+      )
+      
+      # Queue Celery task for batch processing
+      from .tasks import generate_study_plan_batch_task
+      task = generate_study_plan_batch_task.delay(study_plan.id)
+      
+      study_plan.batch_job_id = task.id
+      study_plan.save()
+      
+      return study_plan
+    
+    
+        
+    
 
