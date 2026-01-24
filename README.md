@@ -34,3 +34,11 @@
 7. Context caching for repeated prompts (90% savings)
 8. WebSocket progress notifications
 9. Learning asset management
+
+# Day 04: Mock Interview Simulator & Real-Time AI Evaluation 
+
+1. Real-time mock interview conversation system
+2. Web Speech API integration (client-side STT - FREE!)
+3. Google Cloud Text-to-Speech (interviewer voice)
+4. Context-aware question generation with Gemini
+5. Three-judge AI evaluation system

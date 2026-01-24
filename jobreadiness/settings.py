@@ -73,8 +73,7 @@ LOCAL_APPS = [
     'core',
     'assessment',
     'learning',
-    #'studyplan',     # <-- this is your real app name
-    #'lesson',
+    'interview',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
