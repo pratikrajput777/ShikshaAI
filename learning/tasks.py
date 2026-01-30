@@ -22,7 +22,7 @@ def generate_study_plan_batch_task(self, study_plan_id):
           
       except Exception as exc:
           self.retry(exc=exc, countdown=60)
-
+          
   
 @shared_task(bind=True)
 def generate_study_plan_batch_task(self, study_plan_id):

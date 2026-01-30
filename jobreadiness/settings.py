@@ -74,6 +74,10 @@ LOCAL_APPS = [
     'assessment',
     'learning',
     'interview',
+    'gamification',
+    'billing',
+    'subscriptions',
+    'referrals',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS
