@@ -7,3 +7,5 @@ websocket_urlpatterns = [
         InterviewConsumer.as_asgi()
     ),
 ]
+
+
