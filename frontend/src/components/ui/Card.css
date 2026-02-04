@@ -1,0 +1,7 @@
+.card {
+  background: var(--bg-card, #ffffff);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
