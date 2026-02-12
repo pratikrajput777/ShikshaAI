@@ -10,6 +10,13 @@ class User(AbstractUser):
            blank=True,
            help_text="e.g. visual, auditory, kinesthetic",
        )
+       
+       # Use email as the unique identifier for authentication
+       USERNAME_FIELD = 'email'
+       REQUIRED_FIELDS = ['username']  # username is still required but not used for login
+       
+       # Make email unique
+       email = models.EmailField(unique=True)
 
        class Meta:
            db_table = "users"

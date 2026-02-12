@@ -1,4 +1,29 @@
-import { Outlet, Link } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
+import Navbar from './Navbar'
+import Sidebar from './Sidebar'
+
+export default function MainLayout() {
+  return (
+    <div>
+      <Navbar />
+
+      <div style={{ display: 'flex' }}>
+        <Sidebar />
+
+        <main style={{ padding: 24, flex: 1 }}>
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  )
+}
+
+
+
+
+
+
+/*import { Outlet, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 
 export default function MainLayout() {
@@ -29,4 +54,4 @@ export default function MainLayout() {
       </main>
     </div>
   )
-}
+}*/

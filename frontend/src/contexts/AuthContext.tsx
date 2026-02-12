@@ -16,15 +16,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setIsAuthenticated(!!token)
   }, [])
 
-  /*const loginSuccess = () => {
-    setIsAuthenticated(true)
-  }*/
-
   const loginSuccess = () => {
-  const token = localStorage.getItem('access_token')
-  setIsAuthenticated(!!token)
-}
-
+    setIsAuthenticated(true)
+  }
 
   const logout = () => {
     localStorage.removeItem('access_token')
@@ -33,9 +27,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ isAuthenticated, loginSuccess, logout }}
-    >
+    <AuthContext.Provider value={{ isAuthenticated, loginSuccess, logout }}>
       {children}
     </AuthContext.Provider>
   )
@@ -43,6 +35,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 export function useAuth() {
   const ctx = useContext(AuthContext)
-  if (!ctx) throw new Error('useAuth must be inside AuthProvider')
+  if (!ctx) {
+    throw new Error('useAuth must be used inside AuthProvider')
+  }
   return ctx
 }

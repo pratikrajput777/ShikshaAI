@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { login } from '@/lib/auth'
-import { Button } from '@/components/ui/Button'
-import type { LoginCredentials } from '@/types'
-import { useAuth } from '@/contexts/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { login } from '@/lib/auth'
+import { useAuth } from '@/contexts/AuthContext'
+import type { LoginCredentials } from '@/types'
 
 export default function Login() {
   const [email, setEmail] = useState('')
@@ -11,13 +10,14 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const { loginSuccess } = useAuth()
   const navigate = useNavigate()
+  const { loginSuccess } = useAuth()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
+
     setLoading(true)
+    setError(null)
 
     try {
       const data = await login({
@@ -29,9 +29,10 @@ export default function Login() {
       localStorage.setItem('refresh_token', data.tokens.refresh)
 
       loginSuccess()
+
       navigate('/dashboard')
     } catch (err: any) {
-      setError(err?.response?.data?.message || 'Login failed')
+      setError('Login failed')
     } finally {
       setLoading(false)
     }
@@ -42,11 +43,12 @@ export default function Login() {
       <h2>Login</h2>
 
       <form onSubmit={handleSubmit}>
+
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={e => setEmail(e.target.value)}
           required
           style={{ width: '100%', padding: 10, marginBottom: 12 }}
         />
@@ -55,18 +57,25 @@ export default function Login() {
           type="password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
           required
           style={{ width: '100%', padding: 10, marginBottom: 12 }}
         />
 
-        {error && (
-          <p style={{ color: 'red', marginBottom: 10 }}>{error}</p>
-        )}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
-        <Button type="submit" fullWidth loading={loading}>
-          Login
-        </Button>
+        <button
+          type="submit"
+          disabled={loading}
+          style={{
+            width: '100%',
+            padding: 10,
+            cursor: 'pointer'
+          }}
+        >
+          {loading ? 'Logging in...' : 'Login'}
+        </button>
+
       </form>
     </div>
   )

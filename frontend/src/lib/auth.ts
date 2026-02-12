@@ -1,7 +1,15 @@
-import { api } from './api'
-import type { AuthResponse, LoginCredentials } from '@/types'
+import axios from 'axios'
 
-export const login = async (data: LoginCredentials) => {
-  const res = await api.post<AuthResponse>('/auth/login/', data)
+const api = axios.create({
+  baseURL: 'http://127.0.0.1:8000/api',
+})
+
+export interface LoginPayload {
+  email: string
+  password: string
+}
+
+export async function login(payload: LoginPayload) {
+  const res = await api.post('/auth/login/', payload)
   return res.data
 }
